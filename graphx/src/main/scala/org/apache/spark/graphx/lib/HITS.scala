@@ -54,29 +54,3 @@ object HITS extends Logging {
     rankGraph
   }
 }
-
-/*
-test script...
-
-import org.apache.spark._
-import org.apache.spark.graphx._
-import org.apache.spark.graphx.lib.HITS
-import org.apache.spark.rdd.RDD
-
-val vertices: RDD[(VertexId, Unit)] = sc.parallelize(Array((1L, ()), (2L, ()), (3L, ()), (4L, ()), (5L, ()), (6L, ())))
-val edges: RDD[Edge[Unit]] = sc.parallelize(Array[Edge[Unit]]())
-val edges: RDD[Edge[Unit]] = sc.parallelize(Array(Edge(1L, 2L, ()), Edge(2L, 3L, ())))
-val graph = Graph(vertices, edges)
-
-
-val users: RDD[(VertexId, (String, String))] =
-  sc.parallelize(Array((3L, ("rxin", "student")), (7L, ("jgonzal", "postdoc")),
-                       (5L, ("franklin", "prof")), (2L, ("istoica", "prof"))))
-val relationships: RDD[Edge[String]] =
-  sc.parallelize(Array(Edge(3L, 7L, "collab"),    Edge(5L, 3L, "advisor"),
-                       Edge(2L, 5L, "colleague"), Edge(5L, 7L, "pi")))
-val defaultUser = ("John Doe", "Missing")
-val graph = Graph(users, relationships, defaultUser)
-
-HITS.run(graph, 10).vertices.collect()
-*/
