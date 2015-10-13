@@ -41,6 +41,7 @@ object HITS extends Logging {
       rankGraph = rankGraph.outerJoinVertices(authority_updates) {
         (vid, scores, authority_update) => (authority_update.getOrElse(0), scores._2)
       }
+      rankGraph.cache()
 
       // update hub scores
       val hub_updates = rankGraph.aggregateMessages[Double](
@@ -49,6 +50,7 @@ object HITS extends Logging {
       rankGraph = rankGraph.outerJoinVertices(hub_updates) {
         (vid, scores, hub_update) => (scores._1, hub_update.getOrElse(0))
       }
+      rankGraph.cache()
 
       // normalize scores
       val authority_total = rankGraph.vertices
@@ -60,9 +62,11 @@ object HITS extends Logging {
       if (authority_total != 0) {
         rankGraph = rankGraph.mapVertices((vid, vdata) => (vdata._1 / authority_total, vdata._2))
       }
+      rankGraph.cache()
       if (hub_total != 0) {
         rankGraph = rankGraph.mapVertices((vid, vdata) => (vdata._1, vdata._2 / hub_total))
       }
+      rankGraph.cache()
 
       iteration += 1
     }

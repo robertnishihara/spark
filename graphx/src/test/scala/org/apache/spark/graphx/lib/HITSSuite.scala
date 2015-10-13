@@ -2,13 +2,8 @@ package org.apache.spark.graphx.lib
 
 import org.apache.spark.SparkFunSuite
 import org.apache.spark.graphx._
-//import org.apache.spark.graphx.util.GraphGenerators
 
-// unnecessary?
-//import org.apache.spark._
-//import org.apache.spark.graphx._
-//import org.apache.spark.graphx.lib.HITS
-//import org.apache.spark.rdd.RDD
+import org.apache.spark.rdd.RDD
 
 class HITSSuite extends SparkFunSuite with LocalSparkContext {
 
